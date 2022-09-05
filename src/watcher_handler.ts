@@ -106,28 +106,7 @@ class WatcherHandler {
   /* EVENT HELPERS */
 
   eventsDeduplicate ( events: Event[] ): Event[] {
-
-    if ( events.length < 2 ) return events;
-
-    const targetsEventPrev: Record<Path, TargetEvent> = {};
-
-    return events.reduce<Event[]> ( ( acc, event ) => {
-
-      const [targetEvent, targetPath] = event,
-            targetEventPrev = targetsEventPrev[targetPath];
-
-      if ( targetEvent === targetEventPrev ) return acc; // Same event, ignoring
-
-      if ( targetEvent === TargetEvent.CHANGE && targetEventPrev === TargetEvent.ADD ) return acc; // "change" after "add", ignoring
-
-      targetsEventPrev[targetPath] = targetEvent;
-
-      acc.push ( event );
-
-      return acc;
-
-    }, [] );
-
+    return events;
   }
 
   async eventsPopulate ( targetPaths: Path[], events: Event[] = [], isInitial: boolean = false ): Promise<Event[]> {
