@@ -36,5 +36,5 @@ Thumbs.db
 bower_components
 node_modules
 package-lock.json
-dist
+
 __TREES__
