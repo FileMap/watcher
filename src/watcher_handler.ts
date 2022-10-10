@@ -68,6 +68,7 @@ class WatcherHandler {
               regularEvents = await this.eventsPopulate ([ ...regulars ]),
               events = this.eventsDeduplicate ([ ...initialEvents, ...regularEvents ]);
         console.log("ok:", initialEvents.length, regularEvents.length, events.length);
+        console.log("ok:", initialEvents, regularEvents, events);
         this.onTargetEvents ( events );
 
       };
