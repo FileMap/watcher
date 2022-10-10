@@ -74,13 +74,15 @@ class WatcherHandler {
       };
 
       const flushDebounced = Utils.lang.debounce ( () => {
-
         if ( this.watcher.isClosed () ) return;
-
-        lock = flush ( initials, regulars );
-
+        const initialsYedek = [...initials];
+        const regularsYedek = new Set(regulars);
         initials = [];
         regulars = new Set ();
+        console.log("flush started");
+        lock = flush(initialsYedek, regularsYedek );
+        console.log("flush finished, initials set.");
+        
 
       }, delay );
 
@@ -91,12 +93,14 @@ class WatcherHandler {
           await this.eventsPopulate ( [targetPath], initials, true );
 
         } else { // Poll later
-
+          console.log("add regular");
           regulars.add ( targetPath );
 
         }
 
+        console.log("acquire");
         lock.then ( flushDebounced );
+        console.log("acquire2");
 
       };
 
