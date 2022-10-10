@@ -67,7 +67,7 @@ class WatcherHandler {
         const initialEvents = this.options.ignoreInitial ? [] : initials,
               regularEvents = await this.eventsPopulate ([ ...regulars ]),
               events = this.eventsDeduplicate ([ ...initialEvents, ...regularEvents ]);
-
+        console.log("ok:", initialEvents.length, regularEvents.length, events.length);
         this.onTargetEvents ( events );
 
       };
